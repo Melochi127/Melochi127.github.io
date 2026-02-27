@@ -565,16 +565,31 @@ footer {
   <div class="footer-credit">Built with ✦ for Data & Discovery</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.timeline-item, .project-card').forEach((el, i) => {
-  el.style.transitionDelay = `${i * 0.08}s`;
-  observer.observe(el);
-});
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.getAttribute('id')
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add("visible");
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll(".timeline-item, .project-card").forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.08}s`;
+    observer.observe(el);
+  });
+
+  const sections = Array.from(document.querySelectorAll("section[id]"));
+  const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
+
+  function setActiveNav() {
+    let current = "home";
+    sections.forEach((s) => {
+      if (window.scrollY >= s.offsetTop - 200) current = s.id;
+    });
+    navLinks.forEach((a) => {
+      a.classList.toggle("active", a.getAttribute("href") === `#${current}`);
+    });
+  }
+
+  window.addEventListener("scroll", setActiveNav);
+  setActiveNav();
+</script>
