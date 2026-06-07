@@ -134,12 +134,32 @@ nav {
 .hero-name {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
-  font-size: clamp(3rem, 7vw, 6.4rem);
-  line-height: 0.95;
+  font-size: clamp(3rem, 6vw, 5rem);
+  line-height: 1;
   letter-spacing: -0.04em;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   color: var(--text);
   animation: fadeInUp 0.6s ease 0.1s both;
+}
+
+.hero-subtitle {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.15rem, 2.2vw, 1.65rem);
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1.35;
+  margin-bottom: 0.55rem;
+  animation: fadeInUp 0.6s ease 0.14s both;
+}
+
+.hero-role {
+  font-size: clamp(0.95rem, 1.45vw, 1.08rem);
+  color: var(--muted);
+  font-weight: 700;
+  max-width: 760px;
+  line-height: 1.55;
+  margin-bottom: 1.2rem;
+  animation: fadeInUp 0.6s ease 0.18s both;
 }
 
 .hero-name .line2 {
@@ -680,6 +700,14 @@ strong {
   color: #0f172a !important;
 }
 
+.hero-subtitle {
+  color: #2563eb !important;
+}
+
+.hero-role {
+  color: #334155 !important;
+}
+
 .exp-company,
 .edu-uni,
 .section-label {
@@ -769,9 +797,11 @@ nav {
   <div class="hero-grid">
     <div class="hero-content">
       <div class="hero-badge"><div class="badge-dot"></div> Open to Summer 2026 Internships & 2027 Graduate Roles · No Sponsorship Required</div>
-      <h1 class="hero-name">Nay Chi Oo<span class="line2">MSc Data Science</span></h1>
+      <h1 class="hero-name">Nay Chi Oo</h1>
+      <p class="hero-subtitle">MSc Data Science Candidate (Professional Experience Year)</p>
+      <p class="hero-role">Data Analyst | AI / RAG | Business Operations | CRM Analytics</p>
       <p class="hero-tagline">
-        MSc Data Science candidate with hands-on experience in <strong>data analytics, CRM, business operations, coding instruction and AI/RAG projects</strong>. Currently working with business data at Wimbledon Learning Centre and as an AI Intern on a RAG-based proposal automation project.
+        Hands-on experience in <strong>data analytics, CRM, business operations, coding instruction and AI/RAG projects</strong>. Currently working with business data at Wimbledon Learning Centre and as an AI Intern on a RAG-based proposal automation project.
       </p>
       <div class="availability-note">Seeking Summer 2026 internships and 2027 graduate roles · No visa sponsorship required</div>
       <div class="hero-buttons">
