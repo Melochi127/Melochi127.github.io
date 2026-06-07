@@ -3,306 +3,623 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Nay Chi Oo · MSc Data Science</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<title>Nay Chi Oo · MSc Data Science Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <style>
+
 :root {
-  :root {
-  --bg: #0f172a;
-  --card: #111827;
-  --text: #f8fafc;
-  --muted: #cbd5e1;
-  --accent: #8b5cf6;
-  --accent-2: #38bdf8;
+  --bg: #f8fafc;
+  --bg-2: #eef4ff;
+  --card: #ffffff;
+  --card-soft: #f1f5f9;
+  --text: #172033;
+  --muted: #475569;
+  --muted-2: #64748b;
+  --accent: #2563eb;
+  --accent-2: #7c3aed;
+  --accent-3: #0891b2;
+  --accent-4: #0f766e;
+  --warm: #f8e7ef;
+  --border: #dbe4f0;
+  --shadow: rgba(15, 23, 42, 0.12);
 }
-}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+
 body {
   font-family: 'DM Sans', sans-serif;
-  background: var(--dark);
+  background: linear-gradient(180deg, #ffffff 0%, var(--bg) 42%, #f3f7ff 100%);
   color: var(--text);
   overflow-x: hidden;
 }
+
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-image: radial-gradient(circle at 8% 12%, rgba(37,99,235,0.09), transparent 30%),
+                    radial-gradient(circle at 90% 18%, rgba(124,58,237,0.08), transparent 28%),
+                    radial-gradient(circle at 60% 95%, rgba(8,145,178,0.07), transparent 32%);
   pointer-events: none;
-  z-index: 999;
-  opacity: 0.4;
+  z-index: -1;
 }
 
 /* NAV */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 1.2rem 4rem;
-  backdrop-filter: blur(20px);
-  background: rgba(13,13,20,0.7);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 4rem;
+  backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.86);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.05);
 }
+
 .nav-logo {
-  font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem;
-  background: linear-gradient(135deg, var(--pink), var(--violet));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: var(--accent);
   letter-spacing: -0.02em;
 }
-.nav-links { display: flex; gap: 2rem; list-style: none; }
-.nav-links a {
-  font-size: 0.85rem; font-weight: 500; color: var(--muted);
-  text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.3s;
+
+.nav-links {
+  display: flex;
+  gap: 1.6rem;
+  list-style: none;
 }
-.nav-links a:hover { color: var(--text); }
+
+.nav-links a {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--accent);
+}
 
 /* HERO */
 .hero {
-  min-height: 100vh; display: flex; align-items: center;
-  padding: 8rem 4rem 4rem; position: relative; overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 4rem 4rem;
+  position: relative;
 }
-.hero-bg { position: absolute; inset: 0; z-index: 0; }
-.blob {
-  position: absolute; border-radius: 50%; filter: blur(80px);
-  opacity: 0.22; animation: float 8s ease-in-out infinite;
+
+.hero-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
+  gap: 4rem;
+  align-items: center;
 }
-.blob1 { width: 500px; height: 500px; background: var(--violet); top: -100px; right: -100px; animation-delay: 0s; }
-.blob2 { width: 400px; height: 400px; background: var(--pink); bottom: -150px; left: -50px; animation-delay: -3s; }
-.blob3 { width: 300px; height: 300px; background: var(--cyan); top: 40%; right: 20%; animation-delay: -5s; }
-@keyframes float {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-30px) scale(1.05); }
-}
-.hero-content { position: relative; z-index: 1; max-width: 900px; }
+
+.hero-content { max-width: 850px; }
+
 .hero-badge {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: rgba(196,82,122,0.12); border: 1px solid rgba(196,82,122,0.25);
-  border-radius: 50px; padding: 0.4rem 1rem; font-size: 0.8rem;
-  color: var(--pink); font-family: 'Space Mono', monospace; margin-bottom: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #eaf2ff;
+  border: 1px solid #c9dcff;
+  border-radius: 50px;
+  padding: 0.45rem 1rem;
+  font-size: 0.78rem;
+  color: #1d4ed8;
+  font-family: 'Space Mono', monospace;
+  margin-bottom: 2rem;
   animation: fadeInUp 0.6s ease both;
 }
+
 .badge-dot {
-  width: 6px; height: 6px; background: var(--pink);
-  border-radius: 50%; animation: pulse 2s ease infinite;
+  width: 7px;
+  height: 7px;
+  background: var(--accent-4);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(15, 118, 110, 0.32);
 }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.5)} }
+
 .hero-name {
-  font-family: 'Syne', sans-serif; font-weight: 800;
-  font-size: clamp(3.5rem, 8vw, 7rem); line-height: 0.95;
-  letter-spacing: -0.03em; margin-bottom: 1.5rem;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(3rem, 7vw, 6.4rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.5rem;
+  color: var(--text);
   animation: fadeInUp 0.6s ease 0.1s both;
 }
+
 .hero-name .line2 {
-  background: linear-gradient(135deg, var(--cyan) 0%, var(--green) 50%, var(--yellow) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block;
+  display: block;
+  color: var(--accent);
 }
+
 .hero-tagline {
-  font-size: clamp(1rem, 2vw, 1.3rem); color: var(--muted); max-width: 600px;
-  line-height: 1.7; margin-bottom: 3rem; animation: fadeInUp 0.6s ease 0.2s both;
+  font-size: clamp(1rem, 2vw, 1.22rem);
+  color: var(--muted);
+  max-width: 700px;
+  line-height: 1.75;
+  margin-bottom: 2.4rem;
+  animation: fadeInUp 0.6s ease 0.2s both;
 }
-.hero-tagline strong { color: var(--text); font-weight: 500; }
+
+.hero-tagline strong { color: var(--text); font-weight: 800; }
+
+.availability-note {
+  display: inline-flex;
+  align-items: center;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #047857;
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 800;
+  margin: -0.6rem 0 2rem;
+  box-shadow: 0 10px 24px rgba(4, 120, 87, 0.08);
+}
+
 .hero-buttons {
-  display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeInUp 0.6s ease 0.3s both;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.6s ease 0.3s both;
 }
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: linear-gradient(135deg, var(--pink), var(--violet));
-  color: white; padding: 0.9rem 2rem; border-radius: 50px;
-  font-weight: 600; font-size: 0.95rem; text-decoration: none;
-  transition: transform 0.3s, box-shadow 0.3s;
-  box-shadow: 0 0 24px rgba(106,79,196,0.3);
-}
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(106,79,196,0.4); }
+
+.btn-primary,
 .btn-secondary {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
-  color: var(--text); padding: 0.9rem 2rem; border-radius: 50px;
-  font-weight: 500; font-size: 0.95rem; text-decoration: none; transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.9rem 1.55rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
 }
-.btn-secondary:hover { background: rgba(255,255,255,0.09); transform: translateY(-3px); }
+
+.btn-primary {
+  background: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 14px 34px rgba(37, 99, 235, 0.22);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 42px rgba(37, 99, 235, 0.28);
+}
+
+.btn-secondary {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  color: var(--text);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.btn-secondary:hover {
+  background: #f1f5ff;
+  transform: translateY(-3px);
+}
+
+.hero-photo-card {
+  justify-self: center;
+  width: min(380px, 100%);
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 1.25rem;
+  box-shadow: 0 24px 70px var(--shadow);
+  animation: fadeInUp 0.7s ease 0.25s both;
+}
+
+.profile-photo {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 22px;
+  object-fit: cover;
+  display: block;
+  border: 4px solid #ffffff;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+  background: #e2e8f0;
+}
+
+.photo-note {
+  color: var(--muted-2);
+  font-size: 0.83rem;
+  line-height: 1.55;
+  margin-top: 1rem;
+}
+
 .hero-stats {
-  position: absolute; right: 4rem; bottom: 4rem;
-  display: flex; gap: 2.5rem; animation: fadeInUp 0.6s ease 0.4s both;
+  margin-top: 3rem;
+  display: flex;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.6s ease 0.4s both;
 }
-.stat { text-align: right; }
+
+.stat {
+  min-width: 135px;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
+}
+
 .stat-num {
-  font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2.5rem;
-  background: linear-gradient(135deg, var(--yellow), var(--green));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--accent);
+  line-height: 1;
 }
-.stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.25rem; }
-@keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.4rem;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 /* SECTIONS */
 section { padding: 6rem 4rem; }
+
 .section-label {
-  font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--cyan);
-  letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem;
-  display: flex; align-items: center; gap: 0.75rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
-.section-label::before { content: ''; width: 30px; height: 1px; background: var(--cyan); }
+
+.section-label::before {
+  content: '';
+  width: 30px;
+  height: 1px;
+  background: var(--accent);
+}
+
 .section-title {
-  font-family: 'Syne', sans-serif; font-weight: 800;
-  font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1;
-  letter-spacing: -0.03em; margin-bottom: 3rem;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.3rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 3rem;
+  color: var(--text);
 }
 
 /* ABOUT */
-.about { background: var(--dark2); }
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-.about-text { font-size: 1.1rem; line-height: 1.8; color: rgba(240,238,255,0.8); }
+.about,
+.projects,
+.contact {
+  background: rgba(241, 245, 249, 0.76);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.about-text {
+  font-size: 1.08rem;
+  line-height: 1.85;
+  color: var(--muted);
+}
+
 .about-text p { margin-bottom: 1.5rem; }
+.about-text strong { color: var(--text); }
+
 .highlight {
-  background: linear-gradient(135deg, rgba(196,82,122,0.12), rgba(106,79,196,0.12));
-  border-left: 3px solid var(--pink); padding: 1rem 1.5rem;
-  border-radius: 0 8px 8px 0; font-style: italic; color: var(--text); margin: 2rem 0;
+  background: linear-gradient(135deg, #eaf2ff, #f1edff);
+  border-left: 4px solid var(--accent);
+  padding: 1.3rem 1.5rem;
+  border-radius: 0 14px 14px 0;
+  font-style: italic;
+  color: var(--text);
+  margin: 2rem 0;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
 }
-.skills-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--text); }
-.skill-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+
+.skills-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.08rem;
+  margin-bottom: 1.2rem;
+  color: var(--text);
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+
 .skill-tag {
-  display: inline-block; padding: 0.4rem 1rem; border-radius: 50px;
-  font-size: 0.8rem; font-weight: 500; font-family: 'Space Mono', monospace;
-  transition: transform 0.2s; cursor: default;
+  display: inline-block;
+  padding: 0.42rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  font-family: 'Space Mono', monospace;
+  color: var(--text);
+  background: #ffffff;
+  border: 1px solid var(--border);
 }
-.skill-tag:hover { transform: translateY(-2px); }
-.tag-pink { background: rgba(196,82,122,0.12); border: 1px solid rgba(196,82,122,0.28); color: var(--pink); }
-.tag-violet { background: rgba(106,79,196,0.12); border: 1px solid rgba(106,79,196,0.28); color: #a090d8; }
-.tag-cyan { background: rgba(58,181,200,0.1); border: 1px solid rgba(58,181,200,0.25); color: var(--cyan); }
-.tag-green { background: rgba(58,184,154,0.1); border: 1px solid rgba(58,184,154,0.25); color: var(--green); }
-.tag-yellow { background: rgba(196,168,58,0.1); border: 1px solid rgba(196,168,58,0.25); color: var(--yellow); }
+
+.tag-ai { border-color: #d8ccff; color: #5b21b6; background: #f4f0ff; }
+.tag-data { border-color: #bfdbfe; color: #1d4ed8; background: #eef6ff; }
+.tag-biz { border-color: #bbf7d0; color: #047857; background: #f0fdf4; }
+.tag-tool { border-color: #fed7aa; color: #9a3412; background: #fff7ed; }
 
 /* EXPERIENCE */
 .timeline { position: relative; padding-left: 2rem; }
+
 .timeline::before {
-  content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 2px;
-  background: linear-gradient(to bottom, var(--pink), var(--violet), var(--cyan)); border-radius: 2px;
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent-2), var(--accent-3));
+  border-radius: 2px;
 }
+
 .timeline-item {
-  position: relative; margin-bottom: 3rem; padding-left: 1.5rem;
-  opacity: 0; transform: translateX(-20px); transition: all 0.5s ease;
+  position: relative;
+  margin-bottom: 2.5rem;
+  padding-left: 1.5rem;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.5s ease;
 }
+
 .timeline-item.visible { opacity: 1; transform: translateX(0); }
+
 .timeline-dot {
-  position: absolute; left: -2.55rem; top: 6px;
-  width: 12px; height: 12px; border-radius: 50%;
-  background: var(--pink); border: 2px solid var(--dark);
-  box-shadow: 0 0 8px rgba(196,82,122,0.5);
+  position: absolute;
+  left: -2.55rem;
+  top: 6px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
-.timeline-dot.violet { background: var(--violet); box-shadow: 0 0 8px rgba(106,79,196,0.5); }
-.timeline-dot.cyan { background: var(--cyan); box-shadow: 0 0 8px rgba(58,181,200,0.5); }
-.timeline-dot.green { background: var(--green); box-shadow: 0 0 8px rgba(58,184,154,0.5); }
-.timeline-dot.yellow { background: var(--yellow); box-shadow: 0 0 8px rgba(196,168,58,0.5); }
-.exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
-.exp-role { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; }
+
+.timeline-dot.blue { background: var(--accent); }
+.timeline-dot.green { background: var(--accent-4); }
+.timeline-dot.yellow { background: #d97706; }
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 0.45rem;
+}
+
+.exp-role { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.14rem; color: var(--text); }
+
 .exp-date {
-  font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--muted);
-  background: rgba(255,255,255,0.05); padding: 0.25rem 0.75rem; border-radius: 50px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--muted);
+  background: #ffffff;
+  border: 1px solid var(--border);
+  padding: 0.28rem 0.75rem;
+  border-radius: 999px;
 }
-.exp-company { font-size: 0.9rem; color: var(--pink); margin-bottom: 0.75rem; font-weight: 500; }
-.exp-desc { font-size: 0.9rem; color: rgba(240,238,255,0.6); line-height: 1.7; }
-.exp-desc li { margin-bottom: 0.25rem; list-style: none; padding-left: 1rem; position: relative; }
-.exp-desc li::before { content: '→'; position: absolute; left: 0; color: var(--violet); font-size: 0.75rem; top: 0.1rem; }
+
+.exp-company {
+  font-size: 0.92rem;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  font-weight: 800;
+}
+
+.exp-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.75; }
+
+.exp-desc li {
+  margin-bottom: 0.35rem;
+  list-style: none;
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.exp-desc li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 0.78rem;
+  top: 0.1rem;
+}
 
 /* PROJECTS */
-.projects { background: var(--dark2); }
-.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card,
+.edu-card,
+.contact-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.07);
+}
+
 .project-card {
-  background: var(--card); border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 16px; padding: 1.8rem; position: relative; overflow: hidden;
-  opacity: 0; transform: translateY(20px);
+  border-radius: 18px;
+  padding: 1.65rem;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
   transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.3s;
 }
+
 .project-card.visible { opacity: 1; transform: translateY(0); }
-.project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
-.project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-.card-pink::before { background: linear-gradient(90deg, var(--pink), var(--violet)); }
-.card-cyan::before { background: linear-gradient(90deg, var(--cyan), var(--violet)); }
-.card-green::before { background: linear-gradient(90deg, var(--green), var(--cyan)); }
-.card-yellow::before { background: linear-gradient(90deg, var(--yellow), var(--green)); }
+.project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(15, 23, 42, 0.14); }
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+
+.card-purple::before { background: var(--accent-2); }
+.card-blue::before { background: var(--accent); }
+.card-green::before { background: var(--accent-4); }
+.card-yellow::before { background: #d97706; }
+
 .project-icon {
-  width: 44px; height: 44px; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.3rem; margin-bottom: 1rem;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+  background: var(--card-soft);
 }
-.icon-pink { background: rgba(196,82,122,0.12); }
-.icon-cyan { background: rgba(58,181,200,0.1); }
-.icon-green { background: rgba(58,184,154,0.1); }
-.icon-yellow { background: rgba(196,168,58,0.1); }
-.project-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.6rem; line-height: 1.3; }
-.project-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+
+.project-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.03rem; margin-bottom: 0.6rem; line-height: 1.35; color: var(--text); }
+.project-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; margin-bottom: 1rem; }
+
 .project-metrics { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+
 .metric {
-  font-size: 0.75rem; font-family: 'Space Mono', monospace;
-  padding: 0.2rem 0.6rem; border-radius: 4px;
-  background: rgba(58,184,154,0.1); color: var(--green);
-  border: 1px solid rgba(58,184,154,0.2);
+  font-size: 0.74rem;
+  font-family: 'Space Mono', monospace;
+  padding: 0.22rem 0.6rem;
+  border-radius: 6px;
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #bbf7d0;
 }
-.project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.project-tech { display: flex; flex-wrap: wrap; gap: 0.42rem; }
+
 .tech-badge {
-  font-size: 0.72rem; font-family: 'Space Mono', monospace;
-  padding: 0.2rem 0.6rem; border-radius: 4px;
-  background: rgba(255,255,255,0.05); color: var(--muted);
+  font-size: 0.72rem;
+  font-family: 'Space Mono', monospace;
+  padding: 0.24rem 0.58rem;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: var(--muted);
+  border: 1px solid #e2e8f0;
 }
 
 /* EDUCATION */
 .edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+
 .edu-card {
-  background: var(--card); border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 16px; padding: 2rem; position: relative; overflow: hidden; transition: transform 0.3s;
+  border-radius: 18px;
+  padding: 1.8rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
 }
 .edu-card:hover { transform: translateY(-4px); }
-.edu-year { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--muted); margin-bottom: 1rem; }
-.edu-degree { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
-.edu-uni { font-size: 0.85rem; color: var(--pink); font-weight: 500; margin-bottom: 0.75rem; }
-.edu-modules { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
-.edu-glow {
-  position: absolute; width: 100px; height: 100px; border-radius: 50%;
-  filter: blur(40px); opacity: 0.12; bottom: -20px; right: -20px;
-}
+.edu-year { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--muted-2); margin-bottom: 1rem; }
+.edu-degree { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; margin-bottom: 0.4rem; color: var(--text); }
+.edu-uni { font-size: 0.88rem; color: var(--accent); font-weight: 800; margin-bottom: 0.75rem; }
+.edu-modules { font-size: 0.84rem; color: var(--muted); line-height: 1.65; }
 
 /* CONTACT */
-.contact { background: var(--dark2); }
-.contact-inner { max-width: 700px; margin: 0 auto; text-align: center; }
-.contact-subtitle { font-size: 1.1rem; color: var(--muted); line-height: 1.7; margin-bottom: 3rem; }
-.contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+.contact-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+.contact-subtitle { font-size: 1.06rem; color: var(--muted); line-height: 1.75; margin-bottom: 3rem; }
+.contact-links { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+
 .contact-card {
-  display: flex; align-items: center; gap: 1rem;
-  background: var(--card); border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 16px; padding: 1.2rem 2rem; text-decoration: none; color: var(--text);
-  transition: all 0.3s; min-width: 200px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 18px;
+  padding: 1.1rem 1.5rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.3s;
+  min-width: 200px;
 }
-.contact-card:hover { transform: translateY(-4px); border-color: rgba(196,82,122,0.3); box-shadow: 0 10px 40px rgba(196,82,122,0.1); }
-.contact-icon { font-size: 1.5rem; }
+.contact-card:hover { transform: translateY(-4px); border-color: #bfdbfe; box-shadow: 0 18px 40px rgba(37, 99, 235, 0.10); }
+.contact-icon { font-size: 1.45rem; }
 .contact-info { text-align: left; }
-.contact-type { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Space Mono', monospace; }
-.contact-val { font-size: 0.9rem; font-weight: 600; font-family: 'Syne', sans-serif; }
+.contact-type { font-size: 0.72rem; color: var(--muted-2); text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Space Mono', monospace; }
+.contact-val { font-size: 0.9rem; font-weight: 800; font-family: 'Syne', sans-serif; }
 
 /* FOOTER */
 footer {
-  padding: 2rem 4rem; border-top: 1px solid rgba(255,255,255,0.05);
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 0.8rem; color: var(--muted);
+  padding: 2rem 4rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: var(--muted-2);
+  background: #ffffff;
 }
-.footer-credit {
-  background: linear-gradient(135deg, var(--pink), var(--violet));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  font-family: 'Space Mono', monospace;
+
+.footer-credit { color: var(--accent); font-family: 'Space Mono', monospace; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 6px; }
+
+@media(max-width: 920px) {
+  .hero-grid, .about-grid { grid-template-columns: 1fr; }
+  .hero-photo-card { justify-self: start; max-width: 320px; }
 }
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--dark); }
-::-webkit-scrollbar-thumb { background: var(--violet); border-radius: 4px; }
 
 @media(max-width: 768px) {
-  nav { padding: 1rem 1.5rem; }
+  nav { padding: 1rem 1.4rem; }
   .nav-links { display: none; }
-  section { padding: 4rem 1.5rem; }
-  .hero { padding: 7rem 1.5rem 10rem; }
-  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .hero-stats { position: static; margin-top: 3rem; justify-content: flex-start; }
-  footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 2rem 1.5rem; }
+  section { padding: 4rem 1.4rem; }
+  .hero { padding: 7rem 1.4rem 4rem; }
+  .hero-stats { gap: 1rem; }
+  .stat { min-width: 125px; }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 2rem 1.4rem; }
 }
+
 </style>
 </head>
+
 <body>
 
 <nav>
@@ -317,27 +634,32 @@ footer {
 </nav>
 
 <section class="hero" id="home">
-  <div class="hero-bg">
-    <div class="blob blob1"></div>
-    <div class="blob blob2"></div>
-    <div class="blob blob3"></div>
-  </div>
-  <div class="hero-content">
-    <div class="hero-badge"><div class="badge-dot"></div> Open to Placement & Summer 2026 Internships</div>
-    <h1 class="hero-name">Nay Chi Oo<span class="line2">MSc Data Science</span></h1>
-    <p class="hero-tagline">
-      MSc Data Science candidate building <strong>real-world ML systems</strong> — from RAG-based AI agents to fraud detection pipelines. Bridging <strong>data, code & human insight.</strong>
-    </p>
-    <div class="hero-buttons">
-      <a href="#projects" class="btn-primary">✦ View Projects</a>
-      <a href="https://github.com/Melochi127" target="_blank" class="btn-secondary">⌥ GitHub</a>
-      <a href="https://www.linkedin.com/in/naychi-oo/" target="_blank" class="btn-secondary">↗ LinkedIn</a>
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-badge"><div class="badge-dot"></div> Open to Summer 2026 Internships & 2027 Graduate Roles · No Sponsorship Required</div>
+      <h1 class="hero-name">Nay Chi Oo<span class="line2">MSc Data Science</span></h1>
+      <p class="hero-tagline">
+        MSc Data Science candidate with hands-on experience in <strong>data analytics, CRM, business operations, coding instruction and AI/RAG projects</strong>. Currently working with business data at Wimbledon Learning Centre and as an AI Intern on a RAG-based proposal automation project.
+      </p>
+      <div class="availability-note">Seeking Summer 2026 internships and 2027 graduate roles · No visa sponsorship required</div>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn-primary">✦ View Projects</a>
+        <a href="https://github.com/Melochi127" target="_blank" class="btn-secondary">⌥ GitHub</a>
+        <a href="https://www.linkedin.com/in/naychi-oo/" target="_blank" class="btn-secondary">↗ LinkedIn</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">8+</div><div class="stat-label">Data / AI Projects</div></div>
+        <div class="stat"><div class="stat-num">CRM</div><div class="stat-label">Current Work</div></div>
+        <div class="stat"><div class="stat-num">3yr</div><div class="stat-label">Experience</div></div>
+      </div>
     </div>
-  </div>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-num">6+</div><div class="stat-label">ML Projects</div></div>
-    <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Best Precision</div></div>
-    <div class="stat"><div class="stat-num">3yr</div><div class="stat-label">Experience</div></div>
+
+    <div class="hero-photo-card">
+      <!-- Add your photo in your GitHub Pages repo as: assets/profile.jpg -->
+      <img src="assets/profile.jpg" alt="Nay Chi Oo profile photo" class="profile-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"/>
+      <p class="photo-note" style="display:none;">Add your profile photo as <strong>assets/profile.jpg</strong> to show it here.</p>
+      <p class="photo-note">Data Science · AI · Business Analytics · EdTech</p>
+    </div>
   </div>
 </section>
 
@@ -347,45 +669,74 @@ footer {
   <div class="about-grid">
     <div>
       <div class="about-text">
-        <p>I'm a detail-oriented <strong>MSc Data Science</strong> candidate at the University of Roehampton, London, with a passion for turning messy, real-world data into reliable, actionable insights.</p>
-        <p>With 3 years of customer-facing experience and hands-on work as a Data Analyst Intern, Teaching Assistant, and Stakeholder Interviewer, I bring both technical depth and clear communication to every project.</p>
-        <div class="highlight">"I'm seeking a placement or Summer 2026 internship in Data, Analytics, or Machine Learning — where I can contribute to real-world data products and keep growing fast."</div>
-        <p>Outside of data, you'll find me in the Women in STEM Society, exploring sustainability topics, and practising yoga.</p>
+        <p>
+          I am a detail-oriented <strong>MSc Data Science</strong> candidate at the University of Roehampton, London. I am interested in data analytics, AI, business operations and education technology, with additional learning in data analysis, operations and AI-assisted knowledge systems.
+        </p>
+        <p>
+          I am currently working at <strong>Wimbledon Learning Centre</strong> as a <strong>Business Operations Assistant / Analyst Placement Student and Coding Instructor</strong>. My work includes CRM updates, contact organisation, marketing data, student registration information, reporting support and analysing business data to support better decisions.
+        </p>
+        <p>
+          I also work as an <strong>AI Intern at PMS Company</strong>, supporting a RAG-based proposal automation project. This is separate from my university dissertation, which compares standard RAG with CRAG and examines how the two approaches differ in retrieval quality, grounding and response reliability.
+        </p>
+        <p>
+          I also teach coding to young learners, helping students understand Python, loops, conditionals, simple games and problem-solving in a clear and friendly way.
+        </p>
+        <div class="highlight">
+          I am seeking Summer 2026 internships and 2027 graduate roles in Data, AI, Analytics, Business Operations or EdTech, where I can contribute to real-world data products and continue growing professionally. No visa sponsorship required.
+        </div>
+        <p>
+          Outside of data, I am interested in Women in STEM, sustainability, cultural learning and yoga.
+        </p>
       </div>
     </div>
+
     <div>
-      <div class="skills-title">Languages & Frameworks</div>
+      <div class="skills-title">Technical Skills</div>
       <div class="skill-tags">
-        <span class="skill-tag tag-pink">Python</span>
-        <span class="skill-tag tag-pink">SQL</span>
-        <span class="skill-tag tag-pink">R</span>
-        <span class="skill-tag tag-pink">MATLAB</span>
-        <span class="skill-tag tag-violet">TensorFlow</span>
-        <span class="skill-tag tag-violet">PyTorch</span>
-        <span class="skill-tag tag-violet">Keras</span>
-        <span class="skill-tag tag-violet">scikit-learn</span>
-        <span class="skill-tag tag-violet">LangChain</span>
-        <span class="skill-tag tag-cyan">Apache Spark</span>
-        <span class="skill-tag tag-cyan">NumPy</span>
-        <span class="skill-tag tag-cyan">Pandas</span>
-        <span class="skill-tag tag-cyan">FAISS</span>
+        <span class="skill-tag tag-data">Python</span>
+        <span class="skill-tag tag-data">SQL</span>
+        <span class="skill-tag tag-data">R</span>
+        <span class="skill-tag tag-data">MATLAB</span>
+        <span class="skill-tag tag-data">Pandas</span>
+        <span class="skill-tag tag-data">NumPy</span>
+        <span class="skill-tag tag-data">scikit-learn</span>
+        <span class="skill-tag tag-data">PyTorch</span>
+        <span class="skill-tag tag-data">TensorFlow / Keras</span>
       </div>
-      <div class="skills-title">Areas of Expertise</div>
+
+      <div class="skills-title">AI, Data & Business Tools</div>
       <div class="skill-tags">
-        <span class="skill-tag tag-green">Machine Learning</span>
-        <span class="skill-tag tag-green">Deep Learning</span>
-        <span class="skill-tag tag-green">NLP / RAG</span>
-        <span class="skill-tag tag-green">Data Analytics</span>
-        <span class="skill-tag tag-yellow">Fraud Detection</span>
-        <span class="skill-tag tag-yellow">Anomaly Detection</span>
-        <span class="skill-tag tag-yellow">Time Series</span>
-        <span class="skill-tag tag-yellow">Data Visualisation</span>
-        <span class="skill-tag tag-pink">Business Intelligence</span>
-        <span class="skill-tag tag-violet">Big Data Pipelines</span>
+        <span class="skill-tag tag-ai">RAG</span>
+        <span class="skill-tag tag-ai">CRAG</span>
+        <span class="skill-tag tag-ai">LangChain</span>
+        <span class="skill-tag tag-ai">FAISS</span>
+        <span class="skill-tag tag-tool">Excel</span>
+        <span class="skill-tag tag-tool">Power Query</span>
+        <span class="skill-tag tag-tool">PivotTables</span>
+        <span class="skill-tag tag-tool">Power BI</span>
+        <span class="skill-tag tag-tool">Git</span>
+        <span class="skill-tag tag-biz">CRM</span>
+        <span class="skill-tag tag-biz">Operations</span>
+        <span class="skill-tag tag-biz">Reporting</span>
+        <span class="skill-tag tag-biz">Data Cleaning</span>
       </div>
+
+      <div class="skills-title">Areas of Interest</div>
+      <div class="skill-tags">
+        <span class="skill-tag tag-ai">Machine Learning</span>
+        <span class="skill-tag tag-ai">NLP / RAG / CRAG</span>
+        <span class="skill-tag tag-biz">Business Analytics</span>
+        <span class="skill-tag tag-biz">Operations Analytics</span>
+        <span class="skill-tag tag-data">Data Visualisation</span>
+        <span class="skill-tag tag-data">Anomaly Detection</span>
+        <span class="skill-tag tag-tool">EdTech</span>
+      </div>
+
       <div class="skills-title">Certifications</div>
       <div class="skill-tags">
-        <span class="skill-tag tag-cyan">Lloyds Banking Group — Technology & Data Certificate (2023)</span>
+        <span class="skill-tag tag-tool">Lloyds Banking Group — Technology &amp; Data Certificate</span>
+        <span class="skill-tag tag-data">LinkedIn Learning — Data Analyst</span>
+        <span class="skill-tag tag-biz">Goldman Sachs 10,000 Women — Fundamentals of Operations</span>
       </div>
     </div>
   </div>
@@ -394,144 +745,233 @@ footer {
 <section class="experience" id="experience">
   <div class="section-label">Career Journey</div>
   <h2 class="section-title">Experience</h2>
+
   <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot blue"></div>
+      <div class="exp-header">
+        <div class="exp-role">AI Intern — RAG Proposal Automation</div>
+        <div class="exp-date">2026 – Present</div>
+      </div>
+      <div class="exp-company">PMS Company</div>
+      <ul class="exp-desc">
+        <li>Work on a RAG-based proposal automation project to support proposal drafting and internal knowledge retrieval.</li>
+        <li>Support document processing, retrieval workflows and source-grounded AI responses for proposal-writing use cases.</li>
+        <li>Test AI-generated outputs for relevance, consistency and clarity to improve practical proposal support.</li>
+      </ul>
+    </div>
+
     <div class="timeline-item">
       <div class="timeline-dot"></div>
       <div class="exp-header">
+        <div class="exp-role">Business Operations Assistant / Analyst Placement Student & Coding Instructor</div>
+        <div class="exp-date">2026 – Present</div>
+      </div>
+      <div class="exp-company">Wimbledon Learning Centre, London</div>
+      <ul class="exp-desc">
+        <li>Support business operations by updating student records, parent contact details, registration data and class information.</li>
+        <li>Work with CRM data, marketing lists and campaign information to improve follow-up, communication and student recruitment activity.</li>
+        <li>Clean, organise and analyse business data to support reporting, class planning and operational decision-making.</li>
+        <li>Prepare coding activities and teach young learners Python basics, loops, conditionals, simple games and problem-solving.</li>
+        <li>Communicate with students, parents and colleagues in a clear and professional way.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot blue"></div>
+      <div class="exp-header">
         <div class="exp-role">Computer Lab Teaching Assistant</div>
-        <div class="exp-date">Sep 2025 – Present</div>
+        <div class="exp-date">Sep 2025 – May 2026</div>
       </div>
       <div class="exp-company">University of Roehampton, London</div>
       <ul class="exp-desc">
-        <li>Support ML & Computing labs — Python, NumPy, Pandas, scikit-learn, PyTorch</li>
-        <li>Guide students in debugging, understanding algorithms, and applying ML techniques</li>
-        <li>Collaborate with faculty to prepare lab materials, test assignments, and ensure smooth delivery</li>
+        <li>Support Machine Learning and Computing labs using Python, NumPy, Pandas, scikit-learn and PyTorch.</li>
+        <li>Help students debug code, understand algorithms and apply machine learning techniques.</li>
+        <li>Collaborate with academic staff to test lab materials and support smooth lesson delivery.</li>
       </ul>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-dot violet"></div>
-      <div class="exp-header">
-        <div class="exp-role">Stakeholder Interview Panel Member</div>
-        <div class="exp-date">Present</div>
-      </div>
-      <div class="exp-company">University of Roehampton, London (Students' Representative)</div>
-      <ul class="exp-desc">
-        <li>Represent the student voice on interview panels, assessing candidates for university roles</li>
-        <li>Score applicants against agreed criteria, providing evidence-based feedback</li>
-        <li>Uphold confidentiality, fairness and equality throughout the recruitment process</li>
-      </ul>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot cyan"></div>
-      <div class="exp-header">
-        <div class="exp-role">Invigilator</div>
-        <div class="exp-date">Dec 2025 – Present</div>
-      </div>
-      <div class="exp-company">University of Roehampton, London</div>
-      <ul class="exp-desc">
-        <li>Supervised examinations ensuring compliance with institutional and academic integrity standards</li>
-        <li>Monitored rooms, addressed irregularities, and reported incidents accurately</li>
-      </ul>
-    </div>
+
     <div class="timeline-item">
       <div class="timeline-dot green"></div>
       <div class="exp-header">
         <div class="exp-role">Data Analyst Intern</div>
         <div class="exp-date">May 2025 – Sep 2025</div>
       </div>
-      <div class="exp-company">Qabas Consulting & Training, London UK</div>
+      <div class="exp-company">Qabas Consulting & Training, London</div>
       <ul class="exp-desc">
-        <li>Conducted data analysis to extract insights supporting operational & business decisions</li>
-        <li>Maintained and validated datasets, ensuring accuracy across reports and dashboards</li>
-        <li>Collaborated on performance reporting and forecasting for client projects</li>
+        <li>Analysed data to produce insights supporting operational and business decisions.</li>
+        <li>Maintained, cleaned and validated datasets to improve the accuracy of reports and dashboards.</li>
+        <li>Supported performance reporting and forecasting for client-related projects.</li>
       </ul>
     </div>
+
     <div class="timeline-item">
       <div class="timeline-dot yellow"></div>
+      <div class="exp-header">
+        <div class="exp-role">Invigilator</div>
+        <div class="exp-date">Dec 2025 – May 2026</div>
+      </div>
+      <div class="exp-company">University of Roehampton, London</div>
+      <ul class="exp-desc">
+        <li>Supervise examinations while following institutional rules and academic integrity standards.</li>
+        <li>Monitor exam rooms, provide clear instructions and report incidents accurately.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
       <div class="exp-header">
         <div class="exp-role">Customer Service Associate / General Assistant</div>
         <div class="exp-date">2022 – 2025</div>
       </div>
       <div class="exp-company">SSP Group · GM Caterers · Nero Group, UK</div>
       <ul class="exp-desc">
-        <li>Delivered excellent service in fast-paced environments, resolving queries with professionalism</li>
-        <li>Supported invoicing, payments, and reporting tasks ensuring company compliance</li>
-        <li>Developed communication & problem-solving skills across diverse teams</li>
+        <li>Delivered customer service in fast-paced environments with professionalism and accuracy.</li>
+        <li>Supported payments, invoicing and basic reporting tasks using company systems.</li>
+        <li>Built strong communication, teamwork and problem-solving skills across diverse teams.</li>
       </ul>
     </div>
+
   </div>
 </section>
 
 <section class="projects" id="projects">
   <div class="section-label">Technical Work</div>
   <h2 class="section-title">Projects</h2>
+
   <div class="projects-grid">
-    <div class="project-card card-pink">
-      <div class="project-icon icon-pink">🤖</div>
-      <div class="project-name">AI Proposal Agent</div>
-      <div class="project-desc">NLP-driven RAG pipeline for SME proposal writing. Indexed internal documents with FAISS and orchestrated retrieval + generation using LangChain to draft sections with grounded context.</div>
-      <div class="project-tech"><span class="tech-badge">LangChain</span><span class="tech-badge">FAISS</span><span class="tech-badge">RAG</span><span class="tech-badge">Python</span></div>
+
+    <div class="project-card card-purple">
+      <div class="project-icon">🤖</div>
+      <div class="project-name">AI Proposal Agent — RAG, LangChain, FAISS</div>
+      <div class="project-desc">
+        AI internship project focused on a proposal-writing assistant. Built a Retrieval-Augmented Generation pipeline to retrieve internal documents and generate grounded proposal sections for business proposal support.
+      </div>
+      <div class="project-metrics"><span class="metric">AI Internship</span><span class="metric">Business AI</span></div>
+      <div class="project-tech">
+        <span class="tech-badge">Python</span><span class="tech-badge">LangChain</span><span class="tech-badge">FAISS</span><span class="tech-badge">RAG</span><span class="tech-badge">LLM</span>
+      </div>
     </div>
-    <div class="project-card card-cyan">
-      <div class="project-icon icon-cyan">🛡️</div>
+
+    <div class="project-card card-blue">
+      <div class="project-icon">🧠</div>
+      <div class="project-name">MSc Dissertation — RAG vs CRAG Comparison</div>
+      <div class="project-desc">
+        University dissertation comparing standard Retrieval-Augmented Generation with Corrective RAG, focusing on retrieval quality, grounding, response relevance and reliability for AI knowledge-assistant tasks.
+      </div>
+      <div class="project-metrics"><span class="metric">MSc Dissertation</span><span class="metric">AI Evaluation</span></div>
+      <div class="project-tech">
+        <span class="tech-badge">RAG</span><span class="tech-badge">CRAG</span><span class="tech-badge">Vector Search</span><span class="tech-badge">LLM Evaluation</span><span class="tech-badge">Python</span>
+      </div>
+    </div>
+
+    <div class="project-card card-blue">
+      <div class="project-icon">📊</div>
+      <div class="project-name">CRM & Business Analytics — Wimbledon Learning Centre</div>
+      <div class="project-desc">
+        Current placement work involving CRM contact organisation, marketing data preparation, student registration information, business data cleaning and reporting support.
+      </div>
+      <div class="project-metrics"><span class="metric">Current Work</span><span class="metric">Business Data</span></div>
+      <div class="project-tech">
+        <span class="tech-badge">CRM</span><span class="tech-badge">Excel</span><span class="tech-badge">Data Cleaning</span><span class="tech-badge">Reporting</span><span class="tech-badge">Marketing Data</span>
+      </div>
+    </div>
+
+    <div class="project-card card-blue">
+      <div class="project-icon">🛡️</div>
       <div class="project-name">Credit Card Fraud Detection</div>
-      <div class="project-desc">Real-time fraud detection using Isolation Forest & SMOTE. Scalable data pipeline built with Spark for big data handling.</div>
+      <div class="project-desc">
+        Built a fraud detection model using Isolation Forest and SMOTE, with a scalable Spark-based pipeline for handling larger datasets.
+      </div>
       <div class="project-metrics"><span class="metric">98% Precision</span></div>
-      <div class="project-tech"><span class="tech-badge">Python</span><span class="tech-badge">Apache Spark</span><span class="tech-badge">Isolation Forest</span><span class="tech-badge">SMOTE</span></div>
+      <div class="project-tech">
+        <span class="tech-badge">Python</span><span class="tech-badge">Spark</span><span class="tech-badge">Isolation Forest</span><span class="tech-badge">SMOTE</span>
+      </div>
     </div>
+
     <div class="project-card card-green">
-      <div class="project-icon icon-green">🛍️</div>
+      <div class="project-icon">🌍</div>
+      <div class="project-name">Earthquake Time-Series Anomaly Detection</div>
+      <div class="project-desc">
+        Developed a deep learning anomaly detection model for seismic time-series data to identify unusual earthquake patterns.
+      </div>
+      <div class="project-tech">
+        <span class="tech-badge">Python</span><span class="tech-badge">Deep Learning</span><span class="tech-badge">Time Series</span><span class="tech-badge">Anomaly Detection</span>
+      </div>
+    </div>
+
+    <div class="project-card card-green">
+      <div class="project-icon">🛍️</div>
       <div class="project-name">Shopping Recommender System</div>
-      <div class="project-desc">Analysed customer behaviour patterns to deliver personalised recommendations, significantly boosting engagement.</div>
+      <div class="project-desc">
+        Analysed customer behaviour to create personalised recommendations and improve user engagement.
+      </div>
       <div class="project-metrics"><span class="metric">+30% Engagement</span></div>
-      <div class="project-tech"><span class="tech-badge">Python</span><span class="tech-badge">Collaborative Filtering</span><span class="tech-badge">Pandas</span></div>
+      <div class="project-tech">
+        <span class="tech-badge">Python</span><span class="tech-badge">Pandas</span><span class="tech-badge">Recommendation</span><span class="tech-badge">Analytics</span>
+      </div>
     </div>
+
     <div class="project-card card-yellow">
-      <div class="project-icon icon-yellow">🖼️</div>
+      <div class="project-icon">🖼️</div>
       <div class="project-name">CNN Image Classification</div>
-      <div class="project-desc">Trained and benchmarked two CNN architectures for image classification tasks, reaching strong accuracy across both models.</div>
+      <div class="project-desc">
+        Trained and compared CNN models for image classification, reaching 84% accuracy.
+      </div>
       <div class="project-metrics"><span class="metric">84% Accuracy</span></div>
-      <div class="project-tech"><span class="tech-badge">TensorFlow</span><span class="tech-badge">Keras</span><span class="tech-badge">CNN</span><span class="tech-badge">Python</span></div>
+      <div class="project-tech">
+        <span class="tech-badge">TensorFlow</span><span class="tech-badge">Keras</span><span class="tech-badge">CNN</span><span class="tech-badge">Python</span>
+      </div>
     </div>
-    <div class="project-card card-cyan">
-      <div class="project-icon icon-cyan">🌍</div>
-      <div class="project-name">Earthquake Anomaly Detection</div>
-      <div class="project-desc">Deep learning–based anomaly detection on seismic time-series data to identify unusual earthquake patterns using advanced DL architectures.</div>
-      <div class="project-tech"><span class="tech-badge">Python</span><span class="tech-badge">Deep Learning</span><span class="tech-badge">Time Series</span><span class="tech-badge">Anomaly Detection</span></div>
+
+    <div class="project-card card-purple">
+      <div class="project-icon">🔬</div>
+      <div class="project-name">Diabetic Retinopathy Classification</div>
+      <div class="project-desc">
+        Built and evaluated image-based classification models using fundus image features to support diabetic retinopathy analysis.
+      </div>
+      <div class="project-tech">
+        <span class="tech-badge">MATLAB</span><span class="tech-badge">R</span><span class="tech-badge">Image Features</span><span class="tech-badge">Machine Learning</span>
+      </div>
     </div>
-    <div class="project-card card-pink">
-      <div class="project-icon icon-pink">🔬</div>
-      <div class="project-name">Diabetes Classification</div>
-      <div class="project-desc">Image-based classification models in MATLAB and R to predict diabetes-related outcomes from fungus image features.</div>
-      <div class="project-tech"><span class="tech-badge">MATLAB</span><span class="tech-badge">R</span><span class="tech-badge">Image Classification</span><span class="tech-badge">ML</span></div>
-    </div>
+
   </div>
 </section>
 
 <section id="education">
   <div class="section-label">Academic Background</div>
   <h2 class="section-title">Education</h2>
+
   <div class="edu-grid">
     <div class="edu-card">
-      <div class="edu-glow" style="background:var(--violet)"></div>
       <div class="edu-year">2025 – 2027</div>
       <div class="edu-degree">MSc Data Science (Professional Experience Year)</div>
       <div class="edu-uni">University of Roehampton, London</div>
-      <div class="edu-modules">Machine Learning · Deep Learning · Data Analytics · Data Visualisation</div>
+      <div class="edu-modules">
+        Modules: Machine Learning · Deep Learning · Data Analytics · Data Visualisation<br/>
+        MSc Dissertation: Comparative study of RAG and CRAG, examining differences in retrieval quality, grounding and response reliability.
+      </div>
     </div>
+
     <div class="edu-card">
-      <div class="edu-glow" style="background:var(--pink)"></div>
       <div class="edu-year">2022 – 2023</div>
       <div class="edu-degree">BSc (Hons) Information Technology — 2:1</div>
       <div class="edu-uni">University of the West of England, Bristol</div>
-      <div class="edu-modules">Security Data Analytics · Business Intelligence · Ethics of Computing</div>
+      <div class="edu-modules">
+        Modules: Security Data Analytics · Business Intelligence · Ethics of Computing
+      </div>
     </div>
+
     <div class="edu-card">
-      <div class="edu-glow" style="background:var(--cyan)"></div>
-      <div class="edu-year">2023</div>
-      <div class="edu-degree">Technology & Data Certificate</div>
-      <div class="edu-uni">Lloyds Banking Group</div>
-      <div class="edu-modules">Industry certification in technology and data practices from one of the UK's leading financial institutions.</div>
+      <div class="edu-year">Certifications</div>
+      <div class="edu-degree">Professional Certificates</div>
+      <div class="edu-uni">Data Analytics · Technology · Business Operations</div>
+      <div class="edu-modules">
+        Lloyds Banking Group — Technology &amp; Data Certificate<br/>
+        LinkedIn Learning — Data Analyst<br/>
+        Goldman Sachs 10,000 Women — Fundamentals of Operations
+      </div>
     </div>
   </div>
 </section>
@@ -540,19 +980,24 @@ footer {
   <div class="contact-inner">
     <div class="section-label" style="justify-content:center">Get In Touch</div>
     <h2 class="section-title" style="text-align:center">Let's Connect</h2>
-    <p class="contact-subtitle">I'm actively looking for placements and Summer 2026 internships in Data, Analytics, or Machine Learning. Open to exciting opportunities across the UK!</p>
+    <p class="contact-subtitle">
+      I am actively applying for Summer 2026 internships and 2027 graduate roles in Data, AI, Analytics, Business Operations and EdTech. No visa sponsorship required.
+    </p>
+
     <div class="contact-links">
       <a href="https://www.linkedin.com/in/naychi-oo/" target="_blank" class="contact-card">
         <div class="contact-icon">💼</div>
         <div class="contact-info"><div class="contact-type">LinkedIn</div><div class="contact-val">Nay Chi Oo</div></div>
       </a>
+
       <a href="https://github.com/Melochi127" target="_blank" class="contact-card">
         <div class="contact-icon">⌥</div>
         <div class="contact-info"><div class="contact-type">GitHub</div><div class="contact-val">Melochi127</div></div>
       </a>
-      <a href="/cdn-cgi/l/email-protection#077e68727547626a666e6b2964686a" class="contact-card">
+
+      <a href="mailto:your-email@example.com" class="contact-card">
         <div class="contact-icon">✉️</div>
-        <div class="contact-info"><div class="contact-type">Email</div><div class="contact-val">Get In Touch</div></div>
+        <div class="contact-info"><div class="contact-type">Email</div><div class="contact-val">Email Me</div></div>
       </a>
     </div>
   </div>
@@ -560,34 +1005,37 @@ footer {
 
 <footer>
   <div>© 2026 Nay Chi Oo · All rights reserved</div>
-  <div class="footer-credit">Built with ✦ for Data & Discovery</div>
+  <div class="footer-credit">Built for Data · AI · Business Analytics</div>
 </footer>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add("visible");
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll(".timeline-item, .project-card").forEach((el, i) => {
-    el.style.transitionDelay = `${i * 0.08}s`;
-    observer.observe(el);
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) entry.target.classList.add("visible");
   });
+}, { threshold: 0.1 });
 
-  const sections = Array.from(document.querySelectorAll("section[id]"));
-  const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
+document.querySelectorAll(".timeline-item, .project-card").forEach((el, i) => {
+  el.style.transitionDelay = `${i * 0.06}s`;
+  observer.observe(el);
+});
 
-  function setActiveNav() {
-    let current = "home";
-    sections.forEach((s) => {
-      if (window.scrollY >= s.offsetTop - 200) current = s.id;
-    });
-    navLinks.forEach((a) => {
-      a.classList.toggle("active", a.getAttribute("href") === `#${current}`);
-    });
-  }
+const sections = Array.from(document.querySelectorAll("section[id]"));
+const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
 
-  window.addEventListener("scroll", setActiveNav);
-  setActiveNav();
+function setActiveNav() {
+  let current = "home";
+  sections.forEach((s) => {
+    if (window.scrollY >= s.offsetTop - 200) current = s.id;
+  });
+  navLinks.forEach((a) => {
+    a.classList.toggle("active", a.getAttribute("href") === `#${current}`);
+  });
+}
+
+window.addEventListener("scroll", setActiveNav);
+setActiveNav();
 </script>
+
+</body>
+</html>
